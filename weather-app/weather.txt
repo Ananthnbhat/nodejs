@@ -1,0 +1,2 @@
+to runt he weather app-
+node app.js -a 'Yeshwantpur'
