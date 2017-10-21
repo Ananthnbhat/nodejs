@@ -20,9 +20,9 @@ hbs.registerPartials(__dirname + '/views/partials');
 **middleware is executed in the order in which app.use is written
 
 **install git
-git --version(in node-web-server in cmd)
+git --version(in node-web-server in git bash)
 git init
-git status
+git status- to check the status of the files
 git add server.js
 git add package.json
 create a .gitignore file in node-web-server(root) and write
@@ -31,3 +31,33 @@ server.log
 in that file so that git will ignore any changes done to thos files.
 then,
 git add .gitignore
+at the end,save
+git commit
+git push-to push the saved git to github
+**creating ssh key
+to create- $ssh-keygen -t rsa -b 4096 -C "email@gmail.com"
+to check whether key is present or not-$ls -al ~/.ssh
+id_rsa is the private key
+id_rsa.pub is the public key
+to know the presence of ssh agent-$eval "$(ssh-agen -s)"
+to add the ssh key to ssh agen-$ssh-add ~/.ssh/id_rsa
+to copy the public key to clipboard-$clip <~/.ssh/id_rsa.pub and paste it in ssh page in github to add the new ssh key.
+
+**heroku-create account,download heroku cli,login in git bash using $heroku login
+then-$herku keys:add
+add the key,say yes
+then-$ssh -v git@heroku.com to connect git to heroku?
+
+**changes made to the code so that it can be run by heroku
+see the code
+
+**after some definite changes to the code,do
+git add 
+git commit -m 'message'
+git push
+
+**to create heroku app
+heroku create
+git push heroku-to deploy to heroku
+
+
