@@ -1,0 +1,33 @@
+2 types of sending data on request
+1 using app.send
+another, using express middleware which gives the file directory to the server which accesses the file in that directory
+**middleware-accesses req and res objects,modifies them if required(if you want express to do something which is not there in express,
+you can teach it using middleware)
+app.use is used to register the middlware.
+(middleware,partial,helper which helps partials)
+**template (view) engine-handlebars
+*hbs plugin(3rd party module)is used to wrap/implement handlebars in nodejs
+**views is the default dir express uses for templates.
+*to display/render a template use res.render('filenmae.hbs')//hbs for handlebars
+**Handlebars allows for reuse of some code/template through partials.
+ Partials are normal Handlebars templates that may be called directly by other templates. 
+hbs.registerPartials(__dirname + '/views/partials');
+**hbs.registerHelper('getCurrentYear',()=>{
+    return new Date().getFullYear();
+}); Helper can be used to help a partial
+
+**the definition of middleware should have next(); at the end,otherwise the process wont proceed.
+**middleware is executed in the order in which app.use is written
+
+**install git
+git --version(in node-web-server in cmd)
+git init
+git status
+git add server.js
+git add package.json
+create a .gitignore file in node-web-server(root) and write
+node-modules
+server.log
+in that file so that git will ignore any changes done to thos files.
+then,
+git add .gitignore
