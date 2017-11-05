@@ -1,0 +1,117 @@
+Install mongodb,Robo3t
+Start mongodb server
+Install mongodb wherever you are starting the project(in git bash terminal of vs code).
+npm mongodb@version
+
+** mongodb library,mongo client lets you connect to a mongo server and issue commands to the database.(data is inserted in the database using this library itself,
+in mongodb)
+
+code to connect to database,type
+
+const MongoClient=require('mongodb').MongoClient;
+MongoClient.connect('mongodb://x/y',(err,db)=>{});
+
+where (1st parameter)x is the url of the database,it might be heroku or aws or localhost:27017, etc
+y is the name of the database we wish to CREATE or Communicate with(so here only we can create a database)
+(2nd parameter)is the callback function whose 1st parameter is error which is used to check if we got connected to database and db is the parameter sent from the 
+database which can be used to manipulate the database.
+
+**id-
+first 4 bytes-timestamp
+next 3 bytes-machine identifiers	
+next 2 bytes-processID
+3bytes counter
+
+**object destructuring
+pull out a property from an object and make it a variable
+ex-
+var obj={
+name:'ananth',
+age:21
+};
+var {name}=obj;
+console.log(name);//prints ananth
+
+(FETCHING DATA section in udemy course)
+**to fetch all collections in Todos database,
+ db.collection('Todos').find();
+**to get array of documents
+ db.collection('Todos').find().toArray();
+**to perform some action after the data returns,
+ db.collection('Todos').find().toArray().then((docs)=>{
+         console.log('Todos');
+         console.log(JSON.stringify(docs,undefined,3));
+},(err)=>{
+         console.log('Unable to fetch todos ',err);
+});
+**1performing a query,//using the data in the collection
+db.collection('Todos').find({completed:false}).toArray().then((docs)=>{
+         console.log('Todos');
+         console.log(JSON.stringify(docs,undefined,3));
+     },(err)=>{
+         console.log('Unable to fetch todos ',err);
+     });
+
+**2performing a query,//using the id of the data or object
+db.collection('Todos').find({_id:new ObjectID('59ef7076a324d11b144fdffd')}).toArray().then((docs)=>{
+         console.log('Todos');
+         console.log(JSON.stringify(docs,undefined,3));
+     },(err)=>{
+         console.log('Unable to fetch todos ',err);
+     });
+
+**.find().count().then((count)=>{},(err)=>{});//gives the count of todos available in the database.
+these are some of the classes available in the nodejs mongodb driver api,which is used perform query on the database.
+http://mongodb.github.io/node-mongodb-native/2.2/api/index.html
+
+(DELETING DATA from mongodb section)
+deleteMany
+deleteOne
+findOneAndDelete
+
+(UPDATE)
+db.collection('Todos').findOneAndUpdate(filter,update(see mongodb update operators),options,callback);
+ex-db.collection('Todos').findOneAndUpdate({
+  _id:'aklknflkn3i903jfi'
+},{
+  $set:{
+completed:true
+ }
+},{
+ returnOriginal:false//to return updated record(option)
+}).then((res)=>{
+console.log(res);
+});
+
+
+**Mongoose ORM(object relational mapping)-npm library
+to connect to a database,
+mongoose.Promise=global.Promise;//to make use of promise property of moongoose
+mongoose.connect('mongodb://url');
+**mongoose model is used to specify the kind of attributes our data needs to have or it is used to Validate the data to be stored in database
+var something=mmongoose.model('nameofthecollection',{object which specifies the kind of attributes our data needs to have});
+Ex:-
+var Todo=mongoose.model('Todo',{
+ text:{type:String},
+ completed:{type:Boolean},
+ completedAt:{type:Number}
+});
+
+**to create a new todo,
+var newTodo=new Todo({   //object
+text:'Cook dinner',
+//other things if any
+});
+**to save it to the database,
+newTodo.save().then((doc)=>{
+    console.log(JSON.stringify(doc,undefined,2));
+},(e)=>{
+    console.log('Unable to save',e);
+});
+
+**Resource creation endpoint- POST/todos
+for express,read both the code and Read for node-web-server
+see server1.js
+app.use is used to configure or register the middleware body parser.
+Body parser takes the json(the data entered by user?)and coverts it into object and stores it in req,
+then app.post makes use of this req for displaying back the todo or it can make use of the data entered by user using req.

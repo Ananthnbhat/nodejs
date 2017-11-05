@@ -1,3 +1,13 @@
+**express
+initially do,
+var app=express();
+app.listen(3000,()=>{
+console.log('starting on port 3000')});
+
+2arguments used for every single express route,
+ex:
+app.post('url',(req,res)=>{});
+
 2 types of sending data on request
 1 using app.send
 another, using express middleware which gives the file directory to the server which accesses the file in that directory
@@ -5,6 +15,37 @@ another, using express middleware which gives the file directory to the server w
 you can teach it using middleware)
 app.use is used to register the middlware.
 (middleware,partial,helper which helps partials)
+
+**app.render is used to send a template engine or a handlebar
+whereas app.send is a simple send which is used to send ,for example an error meassage.
+
+**app.use is used to bind or register or configure a middleware to our application,there can be 3rd party module middleware like body-parser or custom middleware.
+if it is 3rd party module then,ex: app.use(bodyParser.json());
+if it is custom middleware then,ex:
+app.use((req,res,next)=>{
+    var now=new Date().toString();
+    var log=`${now}:${req.method} ${req.url}`;
+    console.log(log);
+    fs.appendFile('server.log',log+'\n',(err)=>{ 
+        if(err){
+            console.log('Unable to append to server.log');
+        }
+    });
+    next();
+
+});//custom middleware?
+
+app.get example://app.get is only used for going to some link,it is not used to submit something and then go to some link(app.post is used for that)
+app.get('/about',(req,res)=>{
+res.render('about.hbs',{
+    pageTitle:'About page'
+});
+});
+
+app.post example,//whatever user submits on the client side will bbe stored in req.body which is accessed by express for further use
+app.post('/todos', (req, res) => {
+    console.log(req.body);
+});
 **template (view) engine-handlebars
 *hbs plugin(3rd party module)is used to wrap/implement handlebars in nodejs
 **views is the default dir express uses for templates.
@@ -59,5 +100,36 @@ git push
 **to create heroku app
 heroku create
 git push heroku-to deploy to heroku
+
+**TESTING
+npm test cmd is used to run the test
+the test property in package.json is changed.
+use nodemon --exec "npm test" to make use of nodemon
+create a cusom case called "test-watch":"nodemon --exec \"npm test\""
+then execute,npm run test-watch in cmd line
+
+**assertion library(expect)-used to remove redudancy in place of test cases inutils.test.js
+expect is the module used in mocha to simplify the code,refer mjackson expect page to refer assertions like toBe,toBeA etc
+expect module which is used as a function.
+expect(result).toBe(44);
+some assertions are-
+toBe,toNotBe-for strings,numbers,boolean
+toBeA('string') or number....
+toEqual,toNotEqual-to compare 2 objects
+toInclude,toExclude-whether a array/object includes/excludes an item
+
+
+**MONGODB
+open cmd in D:\Installed apps\mongodb\bin then type,
+mongod.exe --dbpath "D:/Installed apps/mongodb/mongo-data"
+**mongod.exe actually starts the server, mongo.exe is used to execute some commads related to mongodb like create collections,fill the database, etc
+open another cmd in D:\Installed apps\mongodb\bin then type,
+mongo.exe , hit enter.
+
+**Robo 3t is a interface which lets us connect to the local database and real database.
+
+
+
+
 
 
