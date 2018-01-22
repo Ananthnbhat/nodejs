@@ -46,6 +46,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-node-tests/node_modules/*
-note-app/node_modules/*
 node_modules/
