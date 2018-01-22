@@ -48,3 +48,4 @@ Temporary Items
 
 node-tests/node_modules/*
 note-app/node_modules/*
+node_modules/
