@@ -1,1 +1,2 @@
 http://jasonwatmore.com/post/2016/06/22/nodejs-setup-simple-http-server-local-web-server
+to create live server,use the live server extension available in vs code
