@@ -10,9 +10,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+const keys = require('./config');
 
-mongoose.connect('mongodb://localhost/loginapp');
-var db = mongoose.connection;
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
+    .catch(error => console.log(error));
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
